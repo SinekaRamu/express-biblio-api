@@ -50,11 +50,12 @@ const rating = [
 find the rating provided for the book, then display the single book with rating.
 
 ```
+output of the single book
 {
-id: 216,
-title: '',
-isbn: '',
-rating: 4,
+    "id": 1234,
+    "title": "Storywallah",
+    "isbn": "0143445774",
+    "ratings": 5
 }
 ```
 

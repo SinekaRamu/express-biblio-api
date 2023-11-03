@@ -4,15 +4,11 @@ const { ratingSchema } = require("./validations/rating.schema");
 
 const bookId = uuidv4();
 const ratings = [
-  {
-    id: uuidv4(),
-    ratng: 5,
-    bookId: bookId,
-  },
+  
 ];
 const books = [
   {
-    id: uuidv4(),
+    id: 1234,
     title: "Storywallah",
     isbn: "0143445774",
   },
@@ -59,10 +55,18 @@ const getBook = ({ id }) => {
   if (idx === -1) {
     return null;
   }
-  const bookRating = ratings.filter((r) => r.bookId === id);
-  console.log(bookRating);
   const book = books[idx];
-  return book;
+  const ratingIdx = ratings.findIndex((r) => r.bookId === id);
+  console.log(ratingIdx);
+  if(ratingIdx === -1){
+    const singleBook = {...book, ratings: 0}
+    return singleBook;
+  }else{
+    const rate = ratings[ratingIdx].rating;
+    console.log(rate);
+    const singleBook = {...book, ratings: rate}
+    return singleBook;
+  }
 };
 
 module.exports = {
