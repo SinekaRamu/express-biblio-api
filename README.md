@@ -60,3 +60,29 @@ output of the single book
 ```
 
 by default rating should be 0.
+
+## 5. PUT /books/:bookid
+{
+    title: ''
+}
+no isbn should be passed
+
+## 6. DEL /books/:bookid
+
+## 7. PUT /books/:bookid/rating
+{
+    rating: 0 and 5,
+}
+if rating is not found for a book, return error saying so
+
+## 8. GET /rating/:ratingid
+{
+    id: 100,
+    rating: 3,
+    book: {
+        id: 216,
+        title: '',
+        isbn: '',
+    }
+}
+## 9. DEL /rating/:ratingid
