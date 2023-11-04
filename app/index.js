@@ -6,7 +6,7 @@ const express = require("express");
 const morgan = require("morgan");
 
 const Joi = require("joi");
-const { getAllBooks, addBook, addRating, getBook, updateBookTitle } = require("./db");
+const { getAllBooks, addBook, addRating, getBook, updateBookTitle, deleteBook } = require("./db");
 
 const app = express();
 
@@ -64,7 +64,7 @@ app.get("/books/:id", (req, res, next) => {
 
 //Update - the book title
 app.put("/books/:id", (req, res,next)=> {
-  const book = updateBookTitle({id: req.params.id, title: req.body.title});
+  const book = updateBookTitle({id: req.params.id, payload: payload});
   if(!book){
     return next({
       status: 400,
@@ -72,6 +72,18 @@ app.put("/books/:id", (req, res,next)=> {
     })
   }
   res.send(book);
+})
+
+//DELETE - book 
+app.delete("/books/:id", (req,res,next) => {
+  const book = deleteBook({id: req.params.id});
+  if(!book){
+    return next({
+      status: 400,
+      message: "book not found",
+    })
+  }
+  res.send(book)
 })
 
 //errorHandler

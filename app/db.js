@@ -68,13 +68,24 @@ const getBook = ({ id }) => {
 };
 
 //updating book title
-const updateBookTitle = ({id, title}) => {
+const updateBookTitle = ({id, payload}) => {
   const idx = books.findIndex((b)=> b.id == id);
   if(id == -1){
     return null;
   }
-  books[idx]['title'] = title;
+  books[idx]['title'] = payload.title;
   return books[idx];
+}
+
+//deleting the movie 
+const deleteBook = ({id}) => {
+  const idx = books.findIndex((m) => m.id == id);
+  if (idx === -1) {
+    return null;
+  }
+  const movie = books[idx];
+  books.splice(idx, 1);
+  return movie;
 }
 
 module.exports = {
@@ -82,5 +93,6 @@ module.exports = {
   addBook,
   addRating,
   getBook,
-  updateBookTitle
+  updateBookTitle,
+  deleteBook
 };

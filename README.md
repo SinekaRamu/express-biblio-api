@@ -68,6 +68,7 @@ by default rating should be 0.
 no isbn should be passed
 
 ## 6. DEL /books/:bookid
+deleting the book with id
 
 ## 7. PUT /books/:bookid/rating
 {
