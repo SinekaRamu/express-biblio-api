@@ -86,6 +86,26 @@ app.delete("/books/:id", (req,res,next) => {
   res.send(book)
 })
 
+//updating rating
+app.put("/books/:id/rating", (req, res) => {
+  const ratingSchema = Joi.object({
+    rating: Joi.number().min(0).max(5).required(),
+  });
+
+  const { value, error } = ratingSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({
+      message: error.details.map((d) => d.message),
+    });
+  }
+
+  const rating = addRating({
+    rating: req.body.rating,
+    bookId: req.params.id,
+  });
+  return res.json(rating);
+});
+
 //errorHandler
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({

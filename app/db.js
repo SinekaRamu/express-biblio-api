@@ -88,6 +88,25 @@ const deleteBook = ({id}) => {
   return movie;
 }
 
+//updating single book with rating
+const upadteRating = ({ id }) => {
+  const idx = books.findIndex((b) => b.id == id);
+  if (idx === -1) {
+    return null;
+  }
+  const book = books[idx];
+  const ratingIdx = ratings.findIndex((r) => r.bookId === id);
+  console.log(ratingIdx);
+  if(ratingIdx === -1){
+    return console.log("rating not found for the book");
+  }else{
+    const rate = ratings[ratingIdx].rating;
+    console.log(rate);
+    const singleBook = {...book, ratings: rate}
+    return singleBook;
+  }
+};
+
 module.exports = {
   getAllBooks,
   addBook,
