@@ -87,3 +87,5 @@ if rating is not found for a book, return error saying so
     }
 }
 ## 9. DEL /rating/:ratingid
+
+// tmrw have to work on updating and rating url
