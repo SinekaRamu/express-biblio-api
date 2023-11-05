@@ -17,7 +17,6 @@ const books = [
   },
 ];
 
-console.log(ratings)
 //get all books in the api
 const getAllBooks = () => books;
 
@@ -93,7 +92,7 @@ const deleteBook = ({id}) => {
 
 //updating single book with rating
 const updateRating = ({ bookId, rating }) => {
-  const idx = books.findIndex((b)=> b.id == bookId);
+  const idx = books.findIndex((b)=> b.bookId == bookId);
   if(idx == -1){
     return null;
   }
@@ -102,6 +101,13 @@ const updateRating = ({ bookId, rating }) => {
   return rating[idx];
 };
 
+//Deleting the rating
+const deleteRating = ({id})=> {
+  const filteredRate = ratings.filter((r) => r.rateId != id);
+  console.log(filteredRate)
+  
+}
+
 module.exports = {
   getAllBooks,
   addBook,
@@ -109,5 +115,6 @@ module.exports = {
   getBook,
   updateBookTitle,
   deleteBook,
-  updateRating
+  updateRating,
+  deleteRating
 };
