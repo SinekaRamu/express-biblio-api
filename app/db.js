@@ -68,12 +68,13 @@ const getBook = ({ id }) => {
 };
 
 //updating book title
-const updateBookTitle = ({id, payload}) => {
+const updateBookTitle = ({id, title}) => {
   const idx = books.findIndex((b)=> b.id == id);
   if(id == -1){
     return null;
   }
-  books[idx]['title'] = payload.title;
+
+  title && (books[idx]['title'] = title);
   return books[idx];
 }
 

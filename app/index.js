@@ -64,7 +64,7 @@ app.get("/books/:id", (req, res, next) => {
 
 //Update - the book title
 app.put("/books/:id", (req, res,next)=> {
-  const book = updateBookTitle({id: req.params.id, payload: payload});
+  const book = updateBookTitle({id: req.params.id, title: req.body.title});
   if(!book){
     return next({
       status: 400,
