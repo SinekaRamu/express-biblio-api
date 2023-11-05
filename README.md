@@ -74,6 +74,19 @@ deleting the book with id
 {
     rating: 0 and 5,
 }
+```
+//updating single book with rating
+const updateRating = ({ bookId, rating }) => {
+  const idx = books.findIndex((b)=> b.id == bookId);
+  if(idx == -1){
+    return null;
+  }
+  
+  rating && (ratings[idx]['rating'] = rating);
+  return rating[idx];
+};
+
+```
 if rating is not found for a book, return error saying so
 
 ## 8. GET /rating/:ratingid
