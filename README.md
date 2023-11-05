@@ -34,7 +34,7 @@
 ## 3. post /books/:bookid/rating
 
 add rating within the range 0 to 5
-
+only add rating, if it is not entered.
 ```
 const rating = [
     {

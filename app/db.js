@@ -17,6 +17,7 @@ const books = [
   },
 ];
 
+console.log(ratings)
 //get all books in the api
 const getAllBooks = () => books;
 
@@ -37,15 +38,17 @@ const addBook = ({ title, isbn }) => {
 //add rating for the book
 const addRating = ({ rating, bookId }) => {
   const rateId = uuidv4();
-
+  const ratingIdx = ratings.findIndex((r) => r.bookId === id);
+  if(ratingIdx != -1) return null;
   const bookRating = {
     rateId,
     rating,
     bookId,
   };
   ratings.push(bookRating);
-  return bookRating++;
+  return bookRating;
 };
+
 
 //get a single book with rating
 const getBook = ({ id }) => {
@@ -55,14 +58,12 @@ const getBook = ({ id }) => {
   }
   const book = books[idx];
   const ratingIdx = ratings.findIndex((r) => r.bookId === id);
-  console.log(ratingIdx);
   if(ratingIdx === -1){
-    const singleBook = {...book, ratings: 0}
+    let singleBook = {...book, ratings: 0}
     return singleBook;
   }else{
     const rate = ratings[ratingIdx].rating;
-    console.log(rate);
-    const singleBook = {...book, ratings: rate}
+    let singleBook = {...book, ratings: rate}
     return singleBook;
   }
 };
@@ -70,10 +71,11 @@ const getBook = ({ id }) => {
 //updating book title
 const updateBookTitle = ({id, title}) => {
   const idx = books.findIndex((b)=> b.id == id);
-  if(id == -1){
+  if(idx == -1){
     return null;
   }
 
+  
   title && (books[idx]['title'] = title);
   return books[idx];
 }
@@ -90,7 +92,7 @@ const deleteBook = ({id}) => {
 }
 
 //updating single book with rating
-const upadteRating = ({ id }) => {
+const updateRating = ({ id }) => {
   const idx = books.findIndex((b) => b.id == id);
   if (idx === -1) {
     return null;
@@ -114,5 +116,6 @@ module.exports = {
   addRating,
   getBook,
   updateBookTitle,
-  deleteBook
+  deleteBook,
+  updateRating
 };

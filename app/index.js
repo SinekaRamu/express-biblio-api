@@ -6,7 +6,7 @@ const express = require("express");
 const morgan = require("morgan");
 
 const Joi = require("joi");
-const { getAllBooks, addBook, addRating, getBook, updateBookTitle, deleteBook } = require("./db");
+const { getAllBooks, addBook, addRating, getBook, updateBookTitle, deleteBook, updateRating } = require("./db");
 
 const app = express();
 
@@ -87,7 +87,7 @@ app.delete("/books/:id", (req,res,next) => {
 })
 
 //updating rating
-app.put("/books/:id/rating", (req, res) => {
+app.put("/books/:id/rating", (req, res, next) => {
   const ratingSchema = Joi.object({
     rating: Joi.number().min(0).max(5).required(),
   });
@@ -99,10 +99,16 @@ app.put("/books/:id/rating", (req, res) => {
     });
   }
 
-  const rating = addRating({
+  const rating = updateRating({
     rating: req.body.rating,
     bookId: req.params.id,
   });
+  if(!rating){
+    return next({
+      status: 400,
+      message: "no rating found for the book"
+    })
+  }
   return res.json(rating);
 });
 
