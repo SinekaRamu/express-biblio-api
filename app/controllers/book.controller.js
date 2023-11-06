@@ -10,6 +10,8 @@ const {
     deleteRating
 } = require("../db")
 
+const Joi = require("joi");
+
 const getAllBooksController = (req, res) => {
     const books = getAllBooks();
     res.send(books);
