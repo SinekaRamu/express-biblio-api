@@ -7,7 +7,7 @@ const morgan = require("morgan");
 
 const Joi = require("joi");
 const { getAllBooks, addBook, addRating, getBook, 
-  updateBookTitle, deleteBook, updateRating, deleteRating } = require("./db");
+  updateBookTitle, deleteBook, updateRating, deleteRating, getRating } = require("./db");
 
 const app = express();
 
@@ -113,17 +113,30 @@ app.put("/books/:id/rating", (req, res, next) => {
   return res.json(rating);
 });
 
-//DELETE -rating 
-app.delete("/rating/:id", (req, res,next) => {
-  const rate = deleteRating({id: req.params.id});
-  if(!rate){
+//Get rating with book
+app.get("/rating/:id", (req, res, next) => {
+  const ratedBook = getRating({ id: req.params.id });
+  if (!ratedBook) {
     return next({
       status: 400,
       message: "rating not found",
-    })
+    });
   }
-  res.send(rate)
-})
+  res.send(ratedBook);
+});
+
+//DELETE -rating
+app.delete("/rating/:id", (req, res, next) => {
+  const rate = deleteRating({ id: req.params.id });
+  if (!rate) {
+    return next({
+      status: 400,
+      message: "rating not found",
+    });
+  }
+  res.send(rate);
+});
+
 //errorHandler
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
