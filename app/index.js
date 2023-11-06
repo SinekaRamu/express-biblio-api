@@ -2,8 +2,12 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const config = require("./config");
+
 const express = require("express");
 const morgan = require("morgan");
+
+const {errorHandler} = require("./middlewares/errorhandler.middleware")
+const {notfound} = require("./middlewares/notfound.middleware")
 
 const Joi = require("joi");
 const { getAllBooks, addBook, addRating, getBook, 
@@ -137,12 +141,11 @@ app.delete("/rating/:id", (req, res, next) => {
   res.send(rate);
 });
 
+//404 error
+app.use(notfound);
+
 //errorHandler
-app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({
-    message: err.message || ["An unkown error"],
-  });
-});
+app.use(errorHandler);
 
 //PORT
 app.listen(config.appPort, () => {

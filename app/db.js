@@ -8,11 +8,6 @@ const books = [
     title: "Storywallah",
     isbn: "0143445774",
   },
-  {
-    id: uuidv4(),
-    title: "The Gold Crew",
-    isbn: "0446512028",
-  },
 ];
 
 //get all books in the api
