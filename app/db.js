@@ -1,6 +1,5 @@
-const { v4: uuidv4, validate } = require("uuid");
+const { v4: uuidv4} = require("uuid");
 const isValidISBN = require("./validation");
-const { ratingSchema } = require("./validations/rating.schema");
 
 const ratings = [];
 const books = [
@@ -30,7 +29,7 @@ const addBook = ({ title, isbn }) => {
     };
     books.push(book);
     return book;
-  } else console.log("Invalid ");
+  } else return null;
 };
 
 //add rating for the book
