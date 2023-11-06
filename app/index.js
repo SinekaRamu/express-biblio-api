@@ -9,11 +9,9 @@ const morgan = require("morgan");
 const {errorHandler} = require("./middlewares/errorhandler.middleware")
 const {notfound} = require("./middlewares/notfound.middleware")
 
-const {
-  getRatingController, 
-  deleteRatingController} = require("./controllers/book.controller")
-
+//routers
 const bookRouter = require("./routes/book.routes")
+const rateRouter = require("./routes/rating.routes")
 
 const app = express();
 
@@ -23,11 +21,8 @@ app.use(morgan("dev"));
 //Book router
 app.use("/books", bookRouter);
 
-//Get rating with book
-app.get("/rating/:id", getRatingController);
-
-//DELETE -rating
-app.delete("/rating/:id", deleteRatingController);
+//rating router
+app.use("/rating", rateRouter)
 
 //404 error
 app.use(notfound);

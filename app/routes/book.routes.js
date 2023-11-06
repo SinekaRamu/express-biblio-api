@@ -11,24 +11,24 @@ const {
     } = require("../controllers/book.controller")
 
 //READ
-router.get("/books", getAllBooksController);
+router.get("/", getAllBooksController);
 
 //CREATE
-router.post("/books", addBookController);
+router.post("/", addBookController);
 
 //CREATE rating
-router.post("/books/:id/rating", addRatingController);
+router.post("/:id/rating", addRatingController);
 
 //READ - to get one book
-app.get("/books/:id", getBookController);
+router.get("/:id", getBookController);
 
 //Update - the book title
-router.put("/books/:id", updateTitleController); 
+router.put("/:id", updateTitleController); 
 
 //DELETE - book 
-router.delete("/books/:id", )
+router.delete("/:id", )
 
 //updating rating
-router.put("/books/:id/rating", updateRatingController);
+router.put("/:id/rating", updateRatingController);
 
 module.exports = router;
